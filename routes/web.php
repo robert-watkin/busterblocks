@@ -14,19 +14,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::group(['middleware' => 'web'], function () {
-Auth::routes();
+    Auth::routes();
 
-Route::get('/', "PagesController@index");
-Route::get('/basket', "BasketController@Index")->name('basket.index');
+    Route::get('/', "PagesController@index");
+    Route::get('/basket', "BasketController@Index")->name('basket.index');
 
-Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
-Route::post('/admin/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
+    Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
+    Route::post('/admin/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
 
-Route::get('/checkout/order-details', 'CheckoutController@ShowCheckoutForm');
-Route::get('/checkout/order-confirmed', 'CheckoutController@SubmitCheckout')->name('checkout.submit');
+    Route::get('/checkout', 'CheckoutController@ShowCheckoutForm');
+    Route::post('/checkout/order-confirmed', 'CheckoutController@SubmitCheckout')->name('checkout.submit');
 
-Route::patch('/basket/{product}', "BasketController@Update");
-Route::get('/AddToBasket/{id}', "BasketController@AddToBasket");
+    Route::patch('/basket/{product}', "BasketController@Update");
+    Route::get('/AddToBasket/{id}', "BasketController@AddToBasket");
+    Route::delete('/basket/{product}', "BasketController@Remove");
 
-Route::resource('products', "ProductsController")->name('index','product');
+    Route::resource('products', "ProductsController")->name('index','product');
 });

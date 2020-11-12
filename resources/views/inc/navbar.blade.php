@@ -21,8 +21,19 @@
             <ul class="navbar-nav ml-auto">
                 {{-- Basket --}}
                 <li class="nav-item">
+                    
                     @if (session()->get('basket'))
-                        <a class="nav-link" href="/basket">{{count(session()->get('basket'))}} Items in Basket</a>
+                        {{-- Performs count on basket items --}}
+                        @php $items = 0 @endphp
+                        @foreach(session()->get('basket') as $item)
+                            @php
+                                if (!is_float($item) && !is_int($item)){
+                                    $items += $item['quantity'];
+                                }
+                                
+                            @endphp
+                        @endforeach
+                        <a class="nav-link" href="/basket">{{$items}} Items in Basket</a>
                     @else
                         <a class="nav-link" href="/basket">0 Items in Basket</a>
                     @endif

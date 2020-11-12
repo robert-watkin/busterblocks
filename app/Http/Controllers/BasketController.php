@@ -76,6 +76,30 @@ class BasketController extends Controller
         return redirect()->back()->with('success', 'Product added to basket successfully!');
     }
 
+    public function Remove($id){
+        // get the current basket
+        $basket = session()->get('basket');
+
+        // remove the item from the basket
+        if (isset($basket[$id])){
+            unset($basket[$id]);
+        }
+
+        // recalculate the price
+        $basket['total'] = 0;
+
+        foreach ($basket as $product){
+            if ($basket['total'] == $product){
+                continue;
+            }
+            $basket['total'] += $product['price'] * $product['quantity'];
+        }
+
+        // update the basket
+        session()->put('basket', $basket);
+        return redirect('/basket');
+    }
+
     //
     // Handles update requests on the basket quantity
     //

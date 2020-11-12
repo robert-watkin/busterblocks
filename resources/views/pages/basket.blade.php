@@ -15,9 +15,9 @@
     <tbody>
 
     @if($basket)
-        @if(count($basket) > 0)
+        @if(count($basket) > 1)
             @foreach ($basket as $product)
-            @if (is_float($product))
+            @if (is_float($product) || is_int($product))
                 @php continue; @endphp
             @endif
             <tr class='row bg-dark'>
@@ -28,7 +28,10 @@
                 <td class='col-sm-3'>{!! Form::number("quantity", $product['quantity'], ["class" => "quantity col-sm-3", "data-id" => $product["productId"],"step" => "1", "placeholder" => $product['quantity'], "min" => "0"]) !!}</td>
                 <td class='col-sm-1'>£{{$product['price'] * $product['quantity']}}</td>
                 <td class='col-sm-2'>
-                    <a href="#" class="btn btn-danger ml-0">Remove</a>
+                    {!! Form::open(['action' => ['BasketController@Remove', $product['productId']], 'method' => 'POST']) !!}
+                        {{Form::hidden('_method','DELETE')}}
+                        {{Form::submit('Remove', ['class' => 'btn btn-danger'])}}
+                    {!! Form::close() !!}
                 </td>
             </tr>
 
@@ -41,9 +44,10 @@
             </tr>
         @else
         
-            <tr class="row">
-                <td class="col-sm-12 text-center">
+            <tr class="row bg-dark">
+                <td class="col-sm-12 text-center ">
                     <h2>There are no products in your basket.</h2>
+                    <a href="/">Click here to browse products</a>
                 </td>
             </tr>
         @endif
@@ -56,7 +60,12 @@
     @endif
     </tbody>
 </table>
-<a href="/products/order-details" class="btn btn-success">Checkout</a>
+@if(count($basket) > 1)
+<a href="/checkout" class="btn btn-success">Checkout</a>
+@else
+<a href="/checkout" class="btn btn-success" disabled="true">Checkout</a>
+@endif
+
 
 {{-- This section handles the Ajax request for dynamic quantity updates - using axios --}}
 <script src="{{ asset('js/app.js') }}"></script>
