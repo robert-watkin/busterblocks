@@ -8,7 +8,7 @@ use App\Models\Product;
 class BasketController extends Controller
 {
     
-
+    // displays the basket to the user
     public function Index(){
         $basket = session()->get('basket');
 

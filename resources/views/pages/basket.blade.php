@@ -60,12 +60,15 @@
     @endif
     </tbody>
 </table>
+@if(isset($basket))
 @if(count($basket) > 1)
 <a href="/checkout" class="btn btn-success">Checkout</a>
 @else
 <a href="/checkout" class="btn btn-success" disabled="true">Checkout</a>
 @endif
-
+@else
+<a href="/checkout" class="btn btn-success" disabled="true">Checkout</a>
+@endif
 
 {{-- This section handles the Ajax request for dynamic quantity updates - using axios --}}
 <script src="{{ asset('js/app.js') }}"></script>

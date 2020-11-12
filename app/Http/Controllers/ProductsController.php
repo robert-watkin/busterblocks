@@ -60,7 +60,7 @@ class ProductsController extends Controller
             
         // handle file upload
         if($request->hasFile('cover_image')){
-            $fileNameWithExtension = $request->file('cover_image')->getOriginalClientName();
+            $fileNameWithExtension = $request->file('cover_image')->getClientOriginalName();
             // Get just filename
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             // Get just ext
@@ -130,7 +130,7 @@ class ProductsController extends Controller
     {
         // handle file upload
         if($request->hasFile('cover_image')){
-            $fileNameWithExtension = $request->file('cover_image')->getOriginalClientName();
+            $fileNameWithExtension = $request->file('cover_image')->getClientOriginalName();
             // Get just filename
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             // Get just ext
@@ -142,7 +142,6 @@ class ProductsController extends Controller
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
 
         } 
-
 
         // try catch block to handle possible exceptions
         try {
