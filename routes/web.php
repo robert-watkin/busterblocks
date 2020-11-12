@@ -19,7 +19,11 @@ Auth::routes();
 Route::get('/', "PagesController@index");
 Route::get('/basket', "BasketController@Index")->name('basket.index');
 
+Route::get('/admin/login', 'Auth\AdminLoginController@ShowLoginForm')->name('admin.login');
+Route::post('/admin/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
+
+
 Route::patch('/basket/{product}', "BasketController@Update");
 Route::get('/AddToBasket/{id}', "BasketController@AddToBasket");
 
-Route::resource('products', "ProductsController");
+Route::resource('products', "ProductsController")->name('index','product');

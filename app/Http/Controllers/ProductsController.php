@@ -13,7 +13,7 @@ class ProductsController extends Controller
     // constructor to handle permissions
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['AddToBasket', 'show']]);
+        $this->middleware('auth:admin', ['except' => ['AddToBasket', 'show']]);
     }
 
     /**

@@ -10,7 +10,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                @if(Illuminate\Support\Facades\Auth::guard('admin')->check())
+                    <li class="nav-item">
+                        <a href="/products" class="nav-link">Product Manager</a>
+                    </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
