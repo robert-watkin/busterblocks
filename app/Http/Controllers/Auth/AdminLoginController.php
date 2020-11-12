@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminLoginController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest:admin');
+        $this->middleware('guest');
     }
 
     // Display the admin login page

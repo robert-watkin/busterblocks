@@ -56,7 +56,7 @@
     @endif
     </tbody>
 </table>
-<a href="#" class="btn btn-success">Checkout</a>
+<a href="/products/order-details" class="btn btn-success">Checkout</a>
 
 {{-- This section handles the Ajax request for dynamic quantity updates - using axios --}}
 <script src="{{ asset('js/app.js') }}"></script>
